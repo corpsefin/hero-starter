@@ -42,6 +42,7 @@ helpers.findNearestObjectDirectionAndDistance = function (board, fromTile, tileC
     // Keeps track of places the fromTile has been for constant time lookup later
     var visited = {};
 
+
     // Variable assignments for fromTile's coordinates
     var dft = fromTile.distanceFromTop;
     var dfl = fromTile.distanceFromLeft;
@@ -244,6 +245,32 @@ helpers.findNearestTeamMember = function (gameData) {
 
     // Return the direction that needs to be taken to achieve the goal
     return pathInfoObject.direction;
+};
+
+helpers.moveAwayFromEnemy = function(gameData){
+    let hero = gameData.activeHero;
+    let board = gameData.board;
+
+    var pathInfoObject = helpers.findNearestObjectDirectionAndDistance(board, hero, function (enemyTile) {
+        return enemyTile.type === 'Hero' && enemyTile.team !== hero.team;
+    });
+
+    let awayPath = helpers.findNearestObjectDirectionAndDistance(board, hero, function (freeTile) {
+        return freeTile.type === 'Hero' && enemyTile.team !== hero.team;
+    });
+
+    console.log("pathInfo " + pathInfoObject.direction)
+
+    switch(pathInfoObject.direction){
+        case 'North':
+             return pathInfoObject.direction;
+        case 'East':
+            return pathInfoObject.direction;
+        case 'South':
+            return pathInfoObject.direction;
+        case 'West':
+            return pathInfoObject.direction;
+    }
 };
 
 module.exports = helpers;

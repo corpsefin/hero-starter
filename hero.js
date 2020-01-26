@@ -112,10 +112,24 @@ var moves = {
     // This hero will attempt to kill the closest weaker enemy hero.
     carefulAssassin: function (gameData, helpers) {
         var myHero = gameData.activeHero;
-        if (myHero.health < 50) {
-            return helpers.findNearestHealthWell(gameData);
-        } else {
-            return helpers.findNearestWeakerEnemy(gameData);
+
+        let enemy = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
+            if(boardTile.name === 'Enemy')
+                return true;
+        })
+        let enemyDistance = enemy.distance;
+        let enemyDirection = enemy.direction;
+
+        //console.log('Enemy distance: ' + enemyDistance + ' ' + 'Enemy direction: ' + enemyDirection)
+
+        if (myHero.health <= 60) {
+            if(enemyDistance === 1){
+                return helpers.moveAwayFromEnemy(gameData);
+            }
+            //return helpers.findNearestHealthWell(gameData);
+        } 
+        else {
+            return helpers.findNearestWeakerEnemy(gameData) === undefined ? helpers.findNearestEnemy(gameData) : helpers.findNearestWeakerEnemy(gameData);
         }
     },
 
@@ -180,7 +194,7 @@ var moves = {
 };
 
 // Set our hero's strategy
-var move =  moves.aggressor;
+var move =  moves.carefulAssassin;
 
 // Export the move function here
 module.exports = move;
