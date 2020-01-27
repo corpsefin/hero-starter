@@ -123,10 +123,7 @@ var moves = {
         //console.log('Enemy distance: ' + enemyDistance + ' ' + 'Enemy direction: ' + enemyDirection)
 
         if (myHero.health <= 60) {
-            if(enemyDistance === 1){
-                return helpers.moveAwayFromEnemy(gameData);
-            }
-            //return helpers.findNearestHealthWell(gameData);
+            return helpers.findNearestHealthWell(gameData);
         } 
         else {
             return helpers.findNearestWeakerEnemy(gameData) === undefined ? helpers.findNearestEnemy(gameData) : helpers.findNearestWeakerEnemy(gameData);
