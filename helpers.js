@@ -256,10 +256,11 @@ helpers.moveAwayFromEnemy = function(gameData){
     });
 
     let awayPath = helpers.findNearestObjectDirectionAndDistance(board, hero, function (freeTile) {
-        return freeTile.type === 'Hero' && enemyTile.team !== hero.team;
+        console.log(freeTile.type);
+        return freeTile.type === 'Unoccupied' && enemyTile.team !== hero.team;
     });
 
-    console.log("pathInfo " + pathInfoObject.direction)
+    //console.log("pathInfo " + awayPath.type)
 
     switch(pathInfoObject.direction){
         case 'North':
