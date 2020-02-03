@@ -117,19 +117,16 @@ var moves = {
             if(boardTile.name === 'Enemy')
                 return true;
         })
-        let weakEnemyDistance = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
-            if(enemy.health < myHero.health){
+        let weakEnemy = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
+            if(boardTile.name === 'Enemy' && enemy.health < myHero.health){
                 return true;
             }
         });
-
-        //console.log('Enemy distance: ' + enemyDistance + ' ' + 'Enemy direction: ' + enemyDirection)
-        //let freeTile = helpers.moveAwayFromEnemy(gameData);
         if (myHero.health <= 50) {
             return helpers.findNearestHealthWell(gameData);
         } 
         else {
-            if(weakEnemyDistance > 2 && enemy.distance <= 2){
+            if(weakEnemy.distance > 2 && enemy.distance <= 2){
                 return helpers.findNearestEnemy(gameData);
             }
             else{
