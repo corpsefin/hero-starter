@@ -247,7 +247,7 @@ helpers.findNearestTeamMember = function (gameData) {
     return pathInfoObject.direction;
 };
 
-helpers.moveAwayFromEnemy = function(gameData){
+/*helpers.moveAwayFromEnemy = function(gameData){
     let hero = gameData.activeHero;
     let board = gameData.board;
 
@@ -272,6 +272,6 @@ helpers.moveAwayFromEnemy = function(gameData){
         case 'West':
             return pathInfoObject.direction;
     }
-};
+};*/
 
 module.exports = helpers;

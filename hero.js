@@ -113,16 +113,25 @@ var moves = {
     carefulAssassin: function (gameData, helpers) {
         var myHero = gameData.activeHero;
 
+        //ENEMY
         let enemy = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
             if(boardTile.name === 'Enemy')
                 return true;
-        })
+        });
+        
+        //WEAK ENEMY
         let weakEnemy = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
             if(boardTile.name === 'Enemy' && enemy.health < myHero.health){
                 return true;
             }
         });
-        if (myHero.health <= 50) {
+        //HEALTH WELL
+        let healthWell = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile){
+            if(boardTile.name === 'HealthWell')
+                return true;
+        });
+
+        if (myHero.health <= 50 && enemy.distance > 2 && weakEnemy.distance > 2 && healthWell.distance < enemy.distance) {
             return helpers.findNearestHealthWell(gameData);
         } 
         else {
